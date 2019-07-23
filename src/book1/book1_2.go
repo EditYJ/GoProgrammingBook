@@ -1,7 +1,7 @@
 // 1.2 命令行参数
 package main
 
-func main() {
+//func main() {
 
 	//fmt.Println("hello, world")
 
@@ -53,4 +53,4 @@ func main() {
 	//endg:=time.Now()
 	//spendTimeg:= endg.Sub(startg)
 	//fmt.Println("高效方式消耗时间：",spendTimeg)
-}
+//}
