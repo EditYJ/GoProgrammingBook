@@ -48,11 +48,13 @@ func TestJsonType(t *testing.T) {
 
 const IssuesUrl = "https://api.github.com/search/issues"
 
+// 问题的搜索结果
 type IssuesSearchResult struct {
 	TotalCount int `json:"total_count"`
 	Items []*Issue
 }
 
+// 每个问题的实体
 type Issue struct {
 	Number int
 	HTMLURL string `json:"html_url"`
@@ -63,6 +65,7 @@ type Issue struct {
 	Body string
 }
 
+// 提出问题的用户
 type User struct {
 	Login string
 	HTMLURL string `json:"html_url"`
@@ -70,12 +73,17 @@ type User struct {
 
 func SearchIssues(terms []string) (*IssuesSearchResult, error) {
 	q := url.QueryEscape(strings.Join(terms, " "))
-	fmt.Println(q)
+	//fmt.Println(strings.Join(terms, " "))
+
 	resp, err := http.Get(IssuesUrl + "?q=" +q)
 	if err !=nil{
 		return nil,err
 	}
 
+	for k, v := range resp.Header {
+		fmt.Printf("Header[%q] = %q\n",k, v)
+	}
+	// 如果请求失败 我们则必须关闭resp.Body
 	if resp.StatusCode != http.StatusOK{
 		resp.Body.Close()
 		return nil, fmt.Errorf("搜索失败: %s",resp.Status)
