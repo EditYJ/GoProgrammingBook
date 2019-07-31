@@ -12,7 +12,7 @@ import (
 )
 
 // 访问输入的网址，将其内容转换为字节流
-func fetch(url string) *bytes.Reader {
+func Fetch(url string) *bytes.Reader {
 	resp, err := http.Get(url)
 	if err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
@@ -54,7 +54,7 @@ func outline(stack []string, n *html.Node) {
 }
 
 func TestVisit(t *testing.T) {
-	doc, err := html.Parse(fetch("https://juejin.im/post/5d26914de51d45775746b9be"))
+	doc, err := html.Parse(Fetch("https://juejin.im/post/5d26914de51d45775746b9be"))
 	if err != nil {
 		fmt.Printf("findlinks: %v\n", err)
 	}
@@ -64,7 +64,7 @@ func TestVisit(t *testing.T) {
 }
 
 func TestOutline(t *testing.T) {
-	doc, err := html.Parse(fetch("https://juejin.im/post/5d26914de51d45775746b9be"))
+	doc, err := html.Parse(Fetch("https://juejin.im/post/5d26914de51d45775746b9be"))
 	if err != nil {
 		fmt.Printf("findlinks: %v\n", err)
 	}
@@ -73,5 +73,5 @@ func TestOutline(t *testing.T) {
 
 // 测试fetch
 func TestFetch(t *testing.T) {
-	fmt.Println(fetch("https://juejin.im/post/5d26914de51d45775746b9be"))
+	fmt.Println(Fetch("https://juejin.im/post/5d26914de51d45775746b9be"))
 }
